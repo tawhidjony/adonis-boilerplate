@@ -1,0 +1,24 @@
+@layout('layouts.app')
+
+@section('title') 
+Dashboard 
+@endsection
+
+@section('containt')
+  <div class="row vh-100 justify-content-center align-items-center">
+    <div class="col-md-4">
+      @if(flashMessage('notification'))
+        <div class="p-0 mb-3 alert alert-{{ flashMessage('notification.type') }} notification-flash" role="alert">
+          <p class="text-center p-2 m-0">{{ flashMessage('notification.message') }}</p>
+        </div>
+      @endif
+      <div class="card border-0 shadow">
+        <div class="card-body">
+            <h2 class="text-center mt-3">Dashboard</h2>
+            <p>{{auth.user.username ? auth.user.username : ''}}</p>
+            <a href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

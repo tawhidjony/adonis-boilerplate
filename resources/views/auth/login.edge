@@ -1,0 +1,38 @@
+@layout('layouts.app')
+
+@section('title') 
+login 
+@endsection
+
+@section('containt')
+  <div class="row vh-100 justify-content-center align-items-center">
+    <div class="col-md-4">
+      @if(flashMessage('notification'))
+        <div class="p-0 my-3 alert alert-{{ flashMessage('notification.type') }} notification-flash" role="alert">
+          <p class="text-center p-2 m-0">{{ flashMessage('notification.message') }}</p>
+        </div>
+      @endif
+      <div class="card border-0 shadow">
+        <h2 class="text-center mt-3">Login</h2>
+        <div class="card-body">
+          <form action="{{route('login.store')}}" method="POST">
+            {{ csrfField() }}
+            <div class="form-group">
+              <label for="Email">Email address</label>
+              <input type="email" name="email" id="Email" class="form-control {{ hasErrorFor('email') ? ' is-invalid' : '' }}" >
+              {{ elIf('<span class="text-danger text-canter">$self</span>', getErrorFor('email'), hasErrorFor('email'))  }}
+            </div>
+
+            <div class="form-group">
+              <label for="password">password</label>
+              <input type="password" name="password" class="form-control {{ hasErrorFor('password') ? 'is-invalid' : ''}}" id="password">
+              {{ elIf('<span class="text-danger text-canter">$self</span>', getErrorFor('password'), hasErrorFor('password'))  }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
